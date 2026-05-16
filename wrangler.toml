@@ -1,0 +1,10 @@
+# -------------------------------------------------------------------------
+# Cloudflare Pages Edge Deployment Configuration
+# -------------------------------------------------------------------------
+name = "qwik-edge-ecommerce"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[env.production]
+# Bindings for Serverless Form Checkouts (Section 9) can be added here
+# KV_NAMESPACES = [ ... ]

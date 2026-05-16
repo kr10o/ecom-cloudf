@@ -1,0 +1,18 @@
+# eCommerce & CMS Platform Blueprint
+
+<blockquote>
+An ultra-high-performance, zero-hydration, resumable eCommerce and Content Management architecture deployed entirely at the edge via Qwik City and Cloudflare Pages.
+</blockquote>
+
+## Core Architectural Architecture
+* [Foundations](/docs/architecture/foundations) - Understanding resumability, serialization graphs, and why hydration is skipped.
+* [Edge Deployment](/docs/architecture/cloudflare-edge) - Edge clustering, worker lifecycles, and cache tuning parameters.
+
+## Primary Sub-paths
+* [Product Catalog](/products) - Entry node to the static product catalog data graph.
+* [Documentation / CMS](/docs) - Full corpus of documentation and markdown-driven headless content.
+* [Cryptographic Trust Protocols](/docs/security/trust-manifests) - Technical details regarding AT Protocol and Nostr identity verification mappings.
+
+## Optional Resources
+* [API Specification](/api/v1/endpoints) - Raw data endpoints returning semantic JSON matrices.
+* [Repository Synchronization](/docs/headless-cms/git-sync) - Build-time Git automation pipelines.

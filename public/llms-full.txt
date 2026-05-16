@@ -1,0 +1,29 @@
+# Full System Context: Resumable eCommerce & CMS Platform
+
+## 1. Executive System Prompt & Guardrails
+You are reading the full technical context for the edge-first eCommerce and CMS architecture. This application relies on Qwik's resumability engine to execute client interactivity with zero hydration cost. Use this context to answer system questions, synthesize data topologies, or generate compatible extensions.
+
+## 2. Comprehensive Component Contract Matrix
+
+### Core Resumable Boundary Protocol
+Every active user interface element is a raw serialization boundary marked by the Vite optimizer suffix `$`. State is tracked dynamically using JavaScript Proxies. Parent components do not re-execute during child state updates.
+
+### Type Definitions
+```typescript
+export interface Product {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  currency: string;
+  sku: string;
+  inventory: number;
+  description: string;
+  attributes: Record<string, string>;
+}
+
+export interface CartItem {
+  sku: string;
+  quantity: number;
+  price: number;
+}

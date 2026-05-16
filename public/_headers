@@ -1,0 +1,41 @@
+# -------------------------------------------------------------------------
+# 10.1 Maximizing Edge Performance Cache
+# -------------------------------------------------------------------------
+
+# Aggressive Immutable Caching for Qwik Optimizer Assets
+# The Qwik compiler fingerprints all chunks. They will never mutate in place.
+/build/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Semantic Assets and Shared Static Media
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Decentralized Identity and AI Engine Optimization (AEO) Maps
+/.well-known/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+# Explicitly enforcing text/plain for the AT Protocol DID (Bypassing MIME type errors)
+/.well-known/atproto-did
+  Content-Type: text/plain
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# AEO Crawler Map
+/llms.txt
+  Content-Type: text/plain
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/llms-full.txt
+  Content-Type: text/plain
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Global Security Headers for the HTML Document Roots
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=0, must-revalidate

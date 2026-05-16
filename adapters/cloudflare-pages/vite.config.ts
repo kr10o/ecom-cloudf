@@ -13,8 +13,12 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       cloudflarePagesAdapter({
         ssg: {
-          include: ['/*'], // Pre-render all pages into static HTML to be served from edge nodes
-          origin: 'https://ecommerce-blueprint.local',
+          // Pre-render the entire application at build time[cite: 3]
+          include: ['/*'], 
+          // Set the origin to match the production domain
+          origin: 'https://ecommerce-edge.example.com',
+          // Optionally define a sitemap
+          sitemapOutFile: 'sitemap.xml',
         },
       }),
     ],

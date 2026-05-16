@@ -1,0 +1,17 @@
+{
+  "names": {
+    "_": "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+    "shop": "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+    "support": "7cc1a63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa882a"
+  },
+  "relays": {
+    "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d": [
+      "wss://relay.damus.io",
+      "wss://nos.lol",
+      "wss://relay.snort.social"
+    ],
+    "7cc1a63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa882a": [
+      "wss://relay.damus.io"
+    ]
+  }
+}

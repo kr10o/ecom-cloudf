@@ -1,0 +1,77 @@
+name: Qwik Edge CI/CD Pipeline
+
+# -------------------------------------------------------------------------
+# 10.2 Automated Rebuild Hooks
+# -------------------------------------------------------------------------
+on:
+  push:
+    branches:
+      - main
+  # Listen for remote Headless CMS Webhooks (e.g., Content additions)
+  repository_dispatch:
+    types: [cms-content-update]
+  # Allow manual AEO/SEO rebuilds
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: SSG Build & Cloudflare Pages Sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout Ephemeral Environment
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Shallow clone for pipeline speed
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      # -------------------------------------------------------------------------
+      # Execute the Qwik City SSG Pipeline
+      # Fetches JSON/Markdown from GitHub during build time via onStaticGenerate
+      # -------------------------------------------------------------------------
+      - name: Execute SSG Pipeline (Build)
+        env:
+          # Injected to bypass rate limits when pulling Headless CMS data
+          GITHUB_CMS_TOKEN: ${{ secrets.GITHUB_CMS_TOKEN }}
+        run: pnpm run build
+
+      # -------------------------------------------------------------------------
+      # Deploy to Cloudflare Edge Network
+      # -------------------------------------------------------------------------
+      - name: Push to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: qwik-edge-ecommerce
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
+      # -------------------------------------------------------------------------
+      # Core Web Vitals Audit (Post-Release Validation)
+      # -------------------------------------------------------------------------
+      - name: Audit Core Web Vitals (LCP, FID, CLS)
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://qwik-edge-ecommerce.pages.dev/
+          budgetPath: ./budget.json # Fails the pipeline if TTI > 500ms
+          uploadArtifacts: true
