@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/devcontainers/javascript-node:20
 
 # Install global CLI tools: Cloudflare Wrangler, GitHub CLI, and PNPM
-RUN npm install -g pnpm@latest wrangler@latest
+RUN pnpm install -g pnpm@latest wrangler@latest
 
 # Install direnv for shell initialization & secrets architecture
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
